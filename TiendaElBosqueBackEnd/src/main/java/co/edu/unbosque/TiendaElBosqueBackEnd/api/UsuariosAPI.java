@@ -43,4 +43,9 @@ public class UsuariosAPI {
 		usuariosDAO.save(usuarios);
 	}
 
+	@GetMapping("/buscarId/{id}")
+	public List<Usuarios> listarId(@PathVariable("id")Long id){
+		return usuariosDAO.findAll();
+	}
+	
 }
