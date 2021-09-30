@@ -7,6 +7,8 @@ public class Proveedores {
 	private String direccion_proveedor;
 	private String nombre_proveedor;
 	private String telefono_proveedor;
+
+	
 	public Long getNit_proveedor() {
 		return nit_proveedor;
 	}

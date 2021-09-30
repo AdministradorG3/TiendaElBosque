@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unbosque.TiendaElBosqueBackEnd.dao.UsuariosDAO;
 import co.edu.unbosque.TiendaElBosqueBackEnd.model.Usuarios;
+import co.edu.unbosque.TiendaElBosqueBackEnd.dao.*;
 
 @RestController
 @RequestMapping("usuarios")
@@ -21,6 +22,7 @@ public class UsuariosAPI {
 	
 	@Autowired
 	private UsuariosDAO usuariosDAO;
+	
 	
 	@PostMapping("/guardar")
 	public void guardar(@RequestBody Usuarios usuarios) {

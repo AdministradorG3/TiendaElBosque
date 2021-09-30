@@ -42,7 +42,6 @@ public class TestProveedoresJSON {
 		return lista;
 	}
 	
-	
 	public static ArrayList<Proveedores> getJSON() throws IOException, ParseException{
 		
 		url = new URL(sitio +"proveedores/listar");
@@ -64,7 +63,6 @@ public class TestProveedoresJSON {
 		http.disconnect();
 		return lista;
 	}
-	
 	
 	public static int postJSON(Proveedores proveedor) throws IOException {
 		

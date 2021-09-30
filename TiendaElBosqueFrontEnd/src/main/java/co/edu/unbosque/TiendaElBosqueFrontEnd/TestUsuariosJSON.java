@@ -15,8 +15,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
-
 public class TestUsuariosJSON {
 
 	
@@ -131,7 +129,6 @@ public class TestUsuariosJSON {
 		http.disconnect();
 		return respuesta;
 	}
-
 	
 	public static int deleteJSON(Long id) throws IOException {
 		
