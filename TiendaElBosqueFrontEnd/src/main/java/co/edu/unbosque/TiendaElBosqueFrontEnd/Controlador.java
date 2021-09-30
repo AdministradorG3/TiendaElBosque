@@ -89,9 +89,9 @@ public class Controlador extends HttpServlet {
 						try {
 							ArrayList<Usuarios> lista1 = TestUsuariosJSON.getJSON();
 							System.out.println("Parametro: " + id);						
-							for (Usuarios usuario:lista1){
-								if (usuario.getCedula_usuario()==id) {
-									request.setAttribute("usuarioSeleccionado", usuario);
+							for (Usuarios usuarios:lista1){
+								if (usuarios.getCedula_usuario()==id) {
+									request.setAttribute("usuarioSeleccionado", usuarios);
 									request.getRequestDispatcher("Controlador?menu=Usuarios&accion=Listar").forward(request, response);	
 								}
 						   }
