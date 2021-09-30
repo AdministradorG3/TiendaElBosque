@@ -7,6 +7,7 @@ public class Usuarios {
 	private String email_usuario;
 	private String password;
 	private String usuario;
+
 	public Long getCedula_usuario() {
 		return cedula_usuario;
 	}
