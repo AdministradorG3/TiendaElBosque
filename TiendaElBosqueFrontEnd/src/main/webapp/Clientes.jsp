@@ -59,6 +59,24 @@
 	                <th scope="col">Teléfono</th>
 				</tr>
 			</thead>
+	        <tbody>
+	        	<% ArrayList<Clientes> lista= (ArrayList<Clientes>) request.getAttribute("lista");
+				for (Clientes cliente:lista){
+				%>
+				<tr>
+					<td><%=cliente.getCedula_cliente()%></td>
+					<td><%=cliente.getDireccion_cliente()%></td>
+					<td><%=cliente.getEmail_cliente()%></td>
+					<td><%=cliente.getNombre_cliente()%></td>
+					<td><%=cliente.getTelefono_cliente()%></td>
+					<td> 
+		               <a class="btn btn-warning" href="Controlador?menu=Clientes&accion=Cargar&id=<%=cliente.getCedula_cliente()%>">Editar</a>
+		               <a class="btn btn-danger" href="Controlador?menu=Clientes&accion=Eliminar&id=<%=cliente.getCedula_cliente()%>">Eliminar</a>
+	            	</td>
+	            </tr>
+	            <%}%>
+	        </tbody>
+			
 	    </table>
 	</div>
 

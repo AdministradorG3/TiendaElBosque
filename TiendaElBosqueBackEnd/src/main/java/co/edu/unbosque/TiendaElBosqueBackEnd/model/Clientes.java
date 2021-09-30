@@ -43,7 +43,4 @@ public class Clientes {
 	public void setTelefono_cliente(String telefono_cliente) {
 		this.telefono_cliente = telefono_cliente;
 	}
-
-	
-	
 }

@@ -42,10 +42,10 @@ public class Controlador extends HttpServlet {
 		    	 }else if(accion.equals("Agregar")) {
 				     Usuarios usuario = new Usuarios();
 				     usuario.setCedula_usuario(Long.parseLong(request.getParameter("txtcedula")));
-				     usuario.setNombre_usuario(request.getParameter("txtnombre"));
 				     usuario.setEmail_usuario(request.getParameter("txtemail"));
-				     usuario.setUsuario(request.getParameter("txtusuario"));
+				     usuario.setNombre_usuario(request.getParameter("txtnombre"));
 				     usuario.setPassword(request.getParameter("txtpassword"));
+				     usuario.setUsuario(request.getParameter("txtusuario"));
 							
 				     int respuesta=0;
 				     try {
@@ -63,8 +63,8 @@ public class Controlador extends HttpServlet {
 					}else if(accion.equals("Actualizar")) {
 						Usuarios usuario = new Usuarios();
 						usuario.setCedula_usuario(Long.parseLong(request.getParameter("txtcedula")));
-						usuario.setNombre_usuario(request.getParameter("txtnombre"));
 						usuario.setEmail_usuario(request.getParameter("txtemail"));
+						usuario.setNombre_usuario(request.getParameter("txtnombre"));
 						usuario.setPassword(request.getParameter("txtpassword"));
 						usuario.setUsuario(request.getParameter("txtusuario"));
 						
@@ -112,15 +112,96 @@ public class Controlador extends HttpServlet {
 			    			e.printStackTrace();
 			    		}	
 			    	}
-
-
-		    	 
-		    	 
-		    	 
-		    	 
 		    	 request.getRequestDispatcher("/Usuarios.jsp").forward(request, response);
 			  break;
-			case "Clientes":
+
+		     case "Clientes":
+
+		    	 if (accion.equals("Listar")) {
+		    		 try {
+		    			 ArrayList<Clientes> lista = TestClientesJSON.getJSON();
+		    			 request.setAttribute("lista", lista);
+		    		 } catch (Exception e) {
+		    			 e.printStackTrace();
+		    		 }
+		    	 }else if(accion.equals("Agregar")) {
+				     Clientes cliente = new Clientes();
+				     cliente.setCedula_cliente(Long.parseLong(request.getParameter("txtcedula")));
+				     cliente.setDireccion_cliente(request.getParameter("txtdireccion"));
+				     cliente.setEmail_cliente(request.getParameter("txtemail"));
+				     cliente.setNombre_cliente(request.getParameter("txtnombre"));
+				     cliente.setTelefono_cliente(request.getParameter("txttelefono"));
+							
+				     int respuesta=0;
+				     try {
+				    	 respuesta = TestClientesJSON.postJSON(cliente);
+				    	 if (respuesta==200) {
+				    		 request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request,
+		                                                                               response);
+				    	 } else {
+				    		 System.out.println("Error: " +  respuesta);
+				    	 }
+			      	} catch (Exception e) {
+			      		e.printStackTrace();
+			      	}
+							
+					}else if(accion.equals("Actualizar")) {
+						Clientes cliente = new Clientes();
+						cliente.setCedula_cliente(Long.parseLong(request.getParameter("txtcedula")));
+						cliente.setDireccion_cliente(request.getParameter("txtdireccion"));
+					 	cliente.setEmail_cliente(request.getParameter("txtemail"));
+					 	cliente.setNombre_cliente(request.getParameter("txtnombre"));
+					 	cliente.setTelefono_cliente(request.getParameter("txttelefono"));
+						
+						int respuesta=0;
+						try {
+							respuesta = TestClientesJSON.putJSON(cliente, cliente.getCedula_cliente());
+							PrintWriter write = response.getWriter();
+										
+							if (respuesta==200) {
+								request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request, response);
+							} else {
+								write.println("Error: " +  respuesta);
+							}
+							write.close();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}else if(accion.equals("Cargar")) {
+						Long id= Long.parseLong(request.getParameter("id"));
+						try {
+							ArrayList<Clientes> lista1 = TestClientesJSON.getJSON();
+							System.out.println("Parametro: " + id);						
+							for (Clientes clientes:lista1){
+								if (clientes.getCedula_cliente()==id) {
+									request.setAttribute("clienteSeleccionado", clientes);
+									request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request, response);	
+								}
+						   }
+						} catch (Exception e) {
+					       	e.printStackTrace();
+						}
+					}else if(accion.equals("Eliminar")) {
+			        	Long id= Long.parseLong(request.getParameter("id"));			
+			    		int respuesta=0;
+			    		try {
+			    		   respuesta = TestClientesJSON.deleteJSON(id);
+			    		   PrintWriter write = response.getWriter();
+			    		   if (respuesta==200) {
+			    			   request.getRequestDispatcher("Controlador?menu=Clientes&accion=Listar").forward(request, response);
+			    		   } else {
+			    			   write.println("Error: " +  respuesta);
+			    		   }
+			    		   		write.close();
+			    		} catch (Exception e) {
+			    			e.printStackTrace();
+			    		}	
+			    	}
+
+
+		    	 
+				
+				
 				request.getRequestDispatcher("/Clientes.jsp").forward(request, response);
 				break;
 			case "Proveedores":	

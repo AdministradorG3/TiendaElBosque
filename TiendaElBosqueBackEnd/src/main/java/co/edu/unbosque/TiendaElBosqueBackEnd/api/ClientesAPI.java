@@ -12,39 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.unbosque.TiendaElBosqueBackEnd.dao.UsuariosDAO;
-import co.edu.unbosque.TiendaElBosqueBackEnd.model.Usuarios;
+import co.edu.unbosque.TiendaElBosqueBackEnd.dao.ClientesDAO;
+import co.edu.unbosque.TiendaElBosqueBackEnd.model.Clientes;
 
 @RestController
-@RequestMapping("usuarios")
-public class UsuariosAPI {
+@RequestMapping("clientes")
+public class ClientesAPI {
 	
 	@Autowired
-	private UsuariosDAO usuariosDAO;
+	private ClientesDAO clientesDAO;
 	
 	@PostMapping("/guardar")
-	public void guardar(@RequestBody Usuarios usuarios) {
-		usuariosDAO.save(usuarios);
+	public void guardar(@RequestBody Clientes clientes) {
+		clientesDAO.save(clientes);
 	}
 	
 	@GetMapping("/listar")
-	public List<Usuarios> listar(){
-		return usuariosDAO.findAll();
+	public List<Clientes> listar(){
+		return clientesDAO.findAll();	
 	}
 	
 	@DeleteMapping("/eliminar/{id}")
-	public void eliminar (@PathVariable("id")Long id) {
-		usuariosDAO.deleteById(id);
+	public void eliminar(@PathVariable("id")Long id) {
+		clientesDAO.deleteById(id);
 	}
 	
 	@PutMapping("/actualizar")
-	public void actualizar (@RequestBody Usuarios usuarios) {
-		usuariosDAO.save(usuarios);
-	}
-
-	@GetMapping("/buscarId/{id}")
-	public List<Usuarios> listarId(@PathVariable("id")Long id){
-		return usuariosDAO.findAll();
+	public void actualizar(@RequestBody Clientes clientes) {
+		clientesDAO.save(clientes);
 	}
 	
+	@GetMapping("/buscar/{id}")
+	public List<Clientes> listarId(@PathVariable("id")Long id){
+		return clientesDAO.findAll();
+	}
+
 }
